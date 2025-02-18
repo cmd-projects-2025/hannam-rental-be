@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class UserController {
 
-    @GetMapping("/")
-    public String users() {
+    @GetMapping("/signup")
+    public String signup() {
         return "회원가입";
     }
     @GetMapping("/login")
