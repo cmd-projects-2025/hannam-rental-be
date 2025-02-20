@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class UserEntity {
     @Id
     @Column(name = "STUDENT_ID", unique = true, nullable = false, length = 20) // 학번 겸 아이디(유일성, null값 허용X, CHAR(20))
     private String studentId;
@@ -24,5 +24,5 @@ public class User {
     private String phoneNumber;
 
     @Column(nullable = false, length = 50)//이름(null 값 허용 , VARCHAR(50))
-    private String name;
+    private String userName;
 }
