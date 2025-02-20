@@ -1,43 +1,41 @@
 package com.hannam.rental.hannam_rental.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("users")
 
 public class UserController {
 
-    @GetMapping("/signup")
+    @PostMapping("/signup")
     public String signup() {
         return "회원가입";
     }
-    @GetMapping("/login")
-    public String login() {
+    @PostMapping("/users/login")
+    public <UserDTO> login(@ModelAttribute UserDTO userDTO) {
         return "로그인";
     }
-    @GetMapping("/home")
+    @GetMapping("/users/home")
     public String home() {
         return "홈화면";
     }
-    @GetMapping("/home/myPage")
+    @GetMapping("/user/home/myPage")
     public String myPage() {
         return "마이페이지";
     }
-    @GetMapping("/home/select")
+    @GetMapping("/users/home/select")
     public String select() {
         return "대여장소선택";
     }
-    @GetMapping("/home/select/list")
+    @GetMapping("/user/home/select/list")
     public String list() {
         return "대여물품목록";
     }
-    @GetMapping("/home/select/list/apply")
+    @GetMapping("/user/home/select/list/apply")
     public String apply() {
         return "신청페이지";
     }
-    @GetMapping("/logout")
+    @PutMapping("/users/logout")
     public String logout() {
         return "로그아웃";
     }

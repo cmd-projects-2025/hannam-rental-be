@@ -1,6 +1,7 @@
 package com.hannam.rental.hannam_rental.entity;
 
 
+import com.hannam.rental.hannam_rental.dto.UserDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -25,4 +26,13 @@ public class UserEntity {
 
     @Column(nullable = false, length = 50)//이름(null 값 허용 , VARCHAR(50))
     private String userName;
+
+    public static UserEntity toUserEntity(UserDTO userDTO) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setStudentId(userDTO.getStudentId());
+        userEntity.setPassword(userDTO.getPassword());
+        userEntity.setPhoneNumber(userDTO.getPhoneNumber());
+        userEntity.setUserName(userDTO.getUserName());
+        return userEntity;
+    }
 }
