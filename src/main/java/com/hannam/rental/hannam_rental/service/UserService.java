@@ -3,12 +3,10 @@ package com.hannam.rental.hannam_rental.service;
 import com.hannam.rental.hannam_rental.dto.UserDto;
 import com.hannam.rental.hannam_rental.entity.User;
 import com.hannam.rental.hannam_rental.repository.UserRepository;
-import lombok.Builder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@Builder
 public class UserService {
 
     private final UserRepository userRepository;
