@@ -3,8 +3,8 @@ package com.hannam.rental.hannam_rental.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 public class UserDto {
     private String studentId;
     private String password;

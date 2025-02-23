@@ -4,6 +4,7 @@ package com.hannam.rental.hannam_rental.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,11 @@ public class User {
     @Column(nullable = false, length = 50)//이름(null 값 허용 , VARCHAR(50))
     private String name;
 
-    public static Object builder() {
+    @Builder
+    public User(String studentId, String password, String phoneNumber, String name) {
+        this.studentId = studentId;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.name = name;
     }
 }

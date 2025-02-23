@@ -22,7 +22,7 @@ public class UserService {
         validateDuplicateUser(userDto); // 중복 체크
         User user = User.builder()
                 .studentId(userDto.getStudentId())
-                .password(passwordEncoder.encode(userDto.getPassword()))
+                .password(userDto.getPassword())
                 .name(userDto.getName())
                 .phoneNumber(userDto.getPhoneNumber())
                 .build();
