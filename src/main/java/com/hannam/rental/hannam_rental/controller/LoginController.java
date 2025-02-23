@@ -1,4 +1,5 @@
 package com.hannam.rental.hannam_rental.controller;
+import com.hannam.rental.hannam_rental.dto.UserDto;
 import com.hannam.rental.hannam_rental.entity.User;
 import com.hannam.rental.hannam_rental.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -16,9 +17,9 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public <LoginRequest> ResponseEntity<String> login(@RequestBody LoginRequest request,
-                                                       HttpSession session){
-        User user = userService.authenticate(user.getStudentId(), user.getPassword());
+    public ResponseEntity<String> login(@RequestBody UserDto userDto,
+                                        HttpSession session){
+        User user = userService.authenticate(userDto.getStudentId(), userDto.getPassword());
         if(user != null){
             session.setAttribute("user", user);
             return ResponseEntity.ok().body("로그인 성공");
