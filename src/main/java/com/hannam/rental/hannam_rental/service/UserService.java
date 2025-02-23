@@ -3,6 +3,8 @@ package com.hannam.rental.hannam_rental.service;
 import com.hannam.rental.hannam_rental.dto.UserDto;
 import com.hannam.rental.hannam_rental.entity.User;
 import com.hannam.rental.hannam_rental.repository.UserRepository;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +48,19 @@ public class UserService {
                 .phoneNumber(userDto.getPhoneNumber())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .build();
+    }
+
+    //로그인 세션 기능
+    public User authenticate(String studentId, String password) {
+        //사용자 존재 여부 확인
+        User user = userRepository.findByStudentId(studentId)
+                .orElseThrow(() -> new UsernameNotFoundException("해당 사용자가 존재하지 않습니다."));
+
+        //비밀번호 검증
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new BadCredentialsException("비밀번호가 올바르지 않습니다.");
+        }
+
+        return user;
     }
 }
