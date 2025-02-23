@@ -52,15 +52,13 @@ public class UserService {
 
     //로그인 세션 기능
     public User authenticate(String studentId, String password) {
-        //사용자 존재 여부 확인
         User user = userRepository.findByStudentId(studentId)
-                .orElseThrow(() -> new UsernameNotFoundException("해당 사용자가 존재하지 않습니다."));
+                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
 
-        //비밀번호 검증
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new BadCredentialsException("비밀번호가 올바르지 않습니다.");
+            throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
         }
-
         return user;
     }
+
 }
