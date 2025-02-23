@@ -1,7 +1,6 @@
 package com.hannam.rental.hannam_rental.entity;
 
 
-import com.hannam.rental.hannam_rental.dto.UserDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserEntity {
+public class User {
     @Id
     @Column(name = "STUDENT_ID", unique = true, nullable = false, length = 20) // 학번 겸 아이디(유일성, null값 허용X, CHAR(20))
     private String studentId;
@@ -25,14 +24,8 @@ public class UserEntity {
     private String phoneNumber;
 
     @Column(nullable = false, length = 50)//이름(null 값 허용 , VARCHAR(50))
-    private String userName;
+    private String name;
 
-    public static UserEntity toUserEntity(UserDTO userDTO) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setStudentId(userDTO.getStudentId());
-        userEntity.setPassword(userDTO.getPassword());
-        userEntity.setPhoneNumber(userDTO.getPhoneNumber());
-        userEntity.setUserName(userDTO.getUserName());
-        return userEntity;
+    public static Object builder() {
     }
 }

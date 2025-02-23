@@ -1,41 +1,63 @@
 package com.hannam.rental.hannam_rental.controller;
 
+import com.hannam.rental.hannam_rental.dto.UserDto;
+import com.hannam.rental.hannam_rental.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/api/users")
 
 public class UserController {
 
-    @PostMapping("/signup")
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/register") //회원가입-Post
+    public ResponseEntity<String> registerUser(@RequestBody UserDto userDto) {
+        userService.register(userDto);
+        return ResponseEntity.ok("회원가입 성공");
+    }
+
+    @GetMapping("/signup")
     public String signup() {
         return "회원가입";
     }
-    @PostMapping("/users/login")
-    public <UserDTO> login(@ModelAttribute UserDTO userDTO) {
+
+    @GetMapping("/login")
+    public String login() {
         return "로그인";
     }
-    @GetMapping("/users/home")
+
+    @GetMapping("/home")
     public String home() {
         return "홈화면";
     }
-    @GetMapping("/user/home/myPage")
+
+    @GetMapping("/home/myPage")
     public String myPage() {
         return "마이페이지";
     }
-    @GetMapping("/users/home/select")
+
+    @GetMapping("/home/select")
     public String select() {
         return "대여장소선택";
     }
-    @GetMapping("/user/home/select/list")
+
+    @GetMapping("/home/select/list")
     public String list() {
         return "대여물품목록";
     }
-    @GetMapping("/user/home/select/list/apply")
+
+    @GetMapping("/home/select/list/apply")
     public String apply() {
         return "신청페이지";
     }
-    @PutMapping("/users/logout")
+
+    @GetMapping("/logout")
     public String logout() {
         return "로그아웃";
     }
