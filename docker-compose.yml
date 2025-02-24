@@ -1,0 +1,19 @@
+version: '27.5.1'
+services:
+  db:
+    image: mysql:8
+    container_name: hannam-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: HannamRental123  # MySQL root 비밀번호
+      MYSQL_DATABASE: hannam_rental       # 사용할 DB 이름
+      MYSQL_USER: user                    # 일반 사용자 계정
+      MYSQL_PASSWORD: HannamRental123        # 일반 사용자 비밀번호
+    ports:
+      - "3306:3306"  # MySQL 포트 열기
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # 초기 데이터 로드
+
+volumes:
+  mysql_data:
