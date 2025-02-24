@@ -27,11 +27,6 @@ public class UserController {
         return "회원가입";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "로그인";
-    }
-
     @GetMapping("/home")
     public String home() {
         return "홈화면";
