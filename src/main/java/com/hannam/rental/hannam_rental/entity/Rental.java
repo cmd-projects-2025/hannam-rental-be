@@ -1,9 +1,7 @@
 package com.hannam.rental.hannam_rental.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,29 +13,30 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Rental {
     @Id
-    @Column(unique = true, nullable = false)
+    @Column(name="rental_number", unique = true, nullable = false)
     private Integer rentalNumber;
 
-    @Column(nullable = false, length = 20)
+    @Column(name="rental_date", nullable = false, length = 50)
     private String rentalDate;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(name="return_number", nullable = false, length = 50)
     private String returnDate;
 
-    @Column(nullable = false)
+    @Column(name="retrieve_", nullable = false)
     private Boolean retrieve;
 
-    @Column(nullable = false, unique = true, length = 20)
-    private String studentId;
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name="student_id", referencedColumnName = "student_id")
+    private User studentId;
 
-    @Column
+    @Column(name="product_number", nullable = false)
     private Integer productNumber;
 
-    @Column(nullable = false, length = 20)
+    @Column(name="college_", nullable = false, length = 50)
     private String college;
 
     @Builder
-    public Rental(String rentalDate, String returnDate, Boolean retrieve, String studentId, Integer productNumber, String college) {
+    public Rental(String rentalDate, String returnDate, Boolean retrieve, User studentId, Integer productNumber, String college) {
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
         this.retrieve = retrieve;
