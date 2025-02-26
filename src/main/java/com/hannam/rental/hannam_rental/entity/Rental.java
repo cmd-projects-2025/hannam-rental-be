@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -16,13 +18,13 @@ import lombok.Setter;
 public class Rental {
     @Id
     @Column(unique = true, nullable = false)
-    private Integer rentalNumber;
+    private Integer rentalId;
 
     @Column(nullable = false, length = 20)
-    private String rentalDate;
+    private LocalDate rentalDate;
 
     @Column(nullable = false, unique = true, length = 20)
-    private String returnDate;
+    private LocalDate returnDate;
 
     @Column(nullable = false)
     private Boolean retrieve;
@@ -37,7 +39,7 @@ public class Rental {
     private String college;
 
     @Builder
-    public Rental(String rentalDate, String returnDate, Boolean retrieve, String studentId, Integer productNumber, String college) {
+    public Rental(LocalDate rentalDate, LocalDate returnDate, Boolean retrieve, String studentId, Integer productNumber, String college) {
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
         this.retrieve = retrieve;
