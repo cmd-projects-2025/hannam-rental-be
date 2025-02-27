@@ -12,8 +12,8 @@ services:
     ports:
       - "3306:3306"  # MySQL 포트 열기
     volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - mysql_data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # 초기 데이터 로드
 
 volumes:
   mysql_data:
