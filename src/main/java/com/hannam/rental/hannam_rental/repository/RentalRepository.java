@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface RentalRepository extends JpaRepository<Rental, Long> {
-    List<Rental> retrieve();
+    List<Rental> findByRetrieveFalse();
 }
