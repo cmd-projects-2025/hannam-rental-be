@@ -14,18 +14,19 @@ import java.time.LocalDate;
 
 public class Rental { //대여정보
     @Id
-    @Column(unique = true, nullable = false)
+    @Column(name="rental_number", unique = true, nullable = false)
     private Integer rentalNumber;
 
-    @Column(nullable = false, length = 20)
-    private LocalDate rentalDate;
+    @Column(name="rental_date", nullable = false, length = 50)
+    private String rentalDate;
 
-    @Column(nullable = false, unique = true, length = 20)
-    private LocalDate returnDate;
+    @Column(name="return_number", nullable = false, length = 50)
+    private String returnDate;
 
-    @Column(nullable = false)
+
+    @Column(name="retrieve_", nullable = false)
     private Boolean retrieve;
-
+    
     @Column(name = "student_id", nullable = false, length = 20)
     private String studentId;
 

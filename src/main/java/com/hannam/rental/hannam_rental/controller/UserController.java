@@ -32,10 +32,6 @@ public class UserController {
         return "홈화면";
     }
 
-    @GetMapping("/home/myPage")
-    public String myPage() {
-        return "마이페이지";
-    }
 
     @GetMapping("/logout")
     public String logout() {
