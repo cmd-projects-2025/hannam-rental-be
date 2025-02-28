@@ -1,5 +1,6 @@
 package com.hannam.rental.hannam_rental.service;
 
+import com.hannam.rental.hannam_rental.dto.MyPageDto;
 import com.hannam.rental.hannam_rental.dto.UserDto;
 import com.hannam.rental.hannam_rental.entity.User;
 import com.hannam.rental.hannam_rental.repository.UserRepository;
@@ -7,6 +8,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -61,4 +64,17 @@ public class UserService {
         return user;
     }
 
+    public MyPageDto getMyPageInfo(String studentId) {
+        User user = userRepository.findByStudentId(studentId)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+
+        Optional<MyPageDto> rental = userRepository.findTopByUserIdOrderByRentalDateDesc(user.getStudentId());
+
+        if (rental.isEmpty()) {
+            return new MyPageDto(user.getName(), "대여 내역 없음", "", "");
+        }
+
+        MyPageDto rentalInfo = rental.get();
+        return new MyPageDto(user.getName(), rentalInfo.getProduct(), rentalInfo.getRentalDate(), rentalInfo.getRetrieve());
+    }
 }
