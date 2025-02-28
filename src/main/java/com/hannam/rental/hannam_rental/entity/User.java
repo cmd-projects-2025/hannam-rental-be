@@ -10,7 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class User {
     @Id
     @Column(name = "student_id", unique = true, nullable = false, length = 20) // 학번 겸 아이디(유일성, null 허용X, CHAR(20))
