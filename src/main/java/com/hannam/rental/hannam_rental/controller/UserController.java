@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 
 public class UserController {
 
@@ -32,21 +32,6 @@ public class UserController {
         return "홈화면";
     }
 
-
-    @GetMapping("/home/select")
-    public String select() {
-        return "대여장소선택";
-    }
-
-    @GetMapping("/home/select/list")
-    public String list() {
-        return "대여물품목록";
-    }
-
-    @GetMapping("/home/select/list/apply")
-    public String apply() {
-        return "신청페이지";
-    }
 
     @GetMapping("/logout")
     public String logout() {

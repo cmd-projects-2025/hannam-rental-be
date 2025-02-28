@@ -2,16 +2,17 @@ package com.hannam.rental.hannam_rental.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Rental {
+@AllArgsConstructor
+@Builder
+
+public class Rental { //대여정보
     @Id
     @Column(name="rental_number", unique = true, nullable = false)
     private Integer rentalNumber;
@@ -22,26 +23,28 @@ public class Rental {
     @Column(name="return_number", nullable = false, length = 50)
     private String returnDate;
 
+
     @Column(name="retrieve_", nullable = false)
     private Boolean retrieve;
+    
+    @Column(name = "student_id", nullable = false, length = 20)
+    private String studentId;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name="student_id", referencedColumnName = "student_id")
-    private User studentId;
+    @ManyToOne(fetch = FetchType.LAZY) //다대일 일때 지연로딩
+    @JoinColumn(name = "product_number", referencedColumnName = "product_number", nullable = false)
+    private Product product;
 
-    @Column(name="product_number", nullable = false)
-    private Integer productNumber;
-
-    @Column(name="college_", nullable = false, length = 50)
-    private String college;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private College college;
 
     @Builder
-    public Rental(String rentalDate, String returnDate, Boolean retrieve, User studentId, Integer productNumber, String college) {
+    public Rental(LocalDate rentalDate, LocalDate returnDate, Boolean retrieve, String studentId, Product product, College college) {
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
         this.retrieve = retrieve;
         this.studentId = studentId;
-        this.productNumber = productNumber;
+        this.product = product;
         this.college = college;
     }
 }
