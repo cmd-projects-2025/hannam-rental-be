@@ -12,8 +12,8 @@ public class RentalResponseDto {
     private String studentId;
     private Integer productNumber;
     private String productName;
-    private LocalDate rentalDate;
-    private LocalDate returnDate;
+    private String rentalDate;
+    private String returnDate;
     private Boolean retrieve;
     private String college;
 }

@@ -22,7 +22,6 @@ public class Rental { //대여정보
     @Column(name="return_number", nullable = false, length = 50)
     private String returnDate;
 
-
     @Column(name="retrieve_", nullable = false)
     private Boolean retrieve;
     
@@ -38,9 +37,9 @@ public class Rental { //대여정보
     private College college;
 
     @Builder
-    public Rental(LocalDate rentalDate, LocalDate returnDate, Boolean retrieve, String studentId, Product product, College college) {
-        this.rentalDate = String.valueOf(rentalDate);
-        this.returnDate = String.valueOf(returnDate);
+    public Rental(String rentalDate, String returnDate, Boolean retrieve, String studentId, Product product, College college) {
+        this.rentalDate = rentalDate;
+        this.returnDate = returnDate;
         this.retrieve = retrieve;
         this.studentId = studentId;
         this.product = product;

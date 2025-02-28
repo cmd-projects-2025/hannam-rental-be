@@ -65,7 +65,7 @@ public class RentalService {
         Rental rental = Rental.builder()
                 .studentId(user.getStudentId())
                 .product(product)
-                .rentalDate(LocalDate.now())
+                .rentalDate(rentalRepository.findByRentalDate().toString())
                 .retrieve(false)
                 .college(selectedCollege)
                 .build();

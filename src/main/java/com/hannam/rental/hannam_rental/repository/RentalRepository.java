@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface RentalRepository extends JpaRepository<Rental, Long> {
     List<Rental> findByRetrieveFalse();
+    List<Rental> findByRentalDate();
 }
