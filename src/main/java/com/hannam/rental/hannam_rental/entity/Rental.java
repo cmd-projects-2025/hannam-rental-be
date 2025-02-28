@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class Rental { //대여정보
     @Id
     @Column(name="rental_number", unique = true, nullable = false)
@@ -40,8 +39,8 @@ public class Rental { //대여정보
 
     @Builder
     public Rental(LocalDate rentalDate, LocalDate returnDate, Boolean retrieve, String studentId, Product product, College college) {
-        this.rentalDate = rentalDate;
-        this.returnDate = returnDate;
+        this.rentalDate = String.valueOf(rentalDate);
+        this.returnDate = String.valueOf(returnDate);
         this.retrieve = retrieve;
         this.studentId = studentId;
         this.product = product;
