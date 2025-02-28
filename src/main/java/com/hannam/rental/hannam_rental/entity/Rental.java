@@ -3,7 +3,6 @@ package com.hannam.rental.hannam_rental.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -11,6 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "Rental")
 public class Rental { //대여정보
     @Id
     @Column(name="rental_number", unique = true, nullable = false)
@@ -24,8 +24,8 @@ public class Rental { //대여정보
 
     @Column(name="retrieve_", nullable = false)
     private Boolean retrieve;
-    
-    @Column(name = "student_id", nullable = false, length = 20)
+
+    @JoinColumn(name = "student_id", nullable = false)
     private String studentId;
 
     @ManyToOne(fetch = FetchType.LAZY) //다대일 일때 지연로딩
@@ -35,14 +35,4 @@ public class Rental { //대여정보
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
     private College college;
-
-    @Builder
-    public Rental(String rentalDate, String returnDate, Boolean retrieve, String studentId, Product product, College college) {
-        this.rentalDate = rentalDate;
-        this.returnDate = returnDate;
-        this.retrieve = retrieve;
-        this.studentId = studentId;
-        this.product = product;
-        this.college = college;
-    }
 }

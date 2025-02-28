@@ -9,6 +9,7 @@ import com.hannam.rental.hannam_rental.entity.College;
 import com.hannam.rental.hannam_rental.repository.RentalRepository;
 import com.hannam.rental.hannam_rental.repository.UserRepository;
 import com.hannam.rental.hannam_rental.repository.ProductRepository;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -65,7 +66,7 @@ public class RentalService {
         Rental rental = Rental.builder()
                 .studentId(user.getStudentId())
                 .product(product)
-                .rentalDate(rentalRepository.findByRentalDate().toString())
+                .rentalDate(LocalDate.now().toString())
                 .retrieve(false)
                 .college(selectedCollege)
                 .build();

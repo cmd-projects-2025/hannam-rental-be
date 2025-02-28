@@ -2,13 +2,16 @@ package com.hannam.rental.hannam_rental.service;
 
 import com.hannam.rental.hannam_rental.dto.MyPageDto;
 import com.hannam.rental.hannam_rental.dto.UserDto;
+import com.hannam.rental.hannam_rental.entity.Rental;
 import com.hannam.rental.hannam_rental.entity.User;
+import com.hannam.rental.hannam_rental.repository.RentalRepository;
 import com.hannam.rental.hannam_rental.repository.UserRepository;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,11 +19,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final RentalRepository rentalRepository;
 
     //생성자 주입
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, RentalRepository rentalRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.rentalRepository = rentalRepository;
     }
 
     public void register(UserDto userDto) {
@@ -68,13 +73,16 @@ public class UserService {
         User user = userRepository.findByStudentId(studentId)
                 .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
 
-        Optional<MyPageDto> rental = userRepository.findTopByUserIdOrderByRentalDateDesc(user.getStudentId());
+        Rental rental = (Rental) rentalRepository.findByStudentId(studentId)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
 
-        if (rental.isEmpty()) {
+        List<Rental> myPage = rentalRepository.findByRentalDate(rental.getRentalDate());
+
+        if (myPage.isEmpty()) {
             return new MyPageDto(user.getName(), "대여 내역 없음", "", "");
         }
 
-        MyPageDto rentalInfo = rental.get();
+        MyPageDto rentalInfo = (MyPageDto) myPage;
         return new MyPageDto(user.getName(), rentalInfo.getProduct(), rentalInfo.getRentalDate(), rentalInfo.getRetrieve());
     }
 }
