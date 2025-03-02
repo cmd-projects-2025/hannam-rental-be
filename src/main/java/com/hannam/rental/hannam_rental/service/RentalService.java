@@ -9,7 +9,6 @@ import com.hannam.rental.hannam_rental.entity.College;
 import com.hannam.rental.hannam_rental.repository.RentalRepository;
 import com.hannam.rental.hannam_rental.repository.UserRepository;
 import com.hannam.rental.hannam_rental.repository.ProductRepository;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -52,7 +51,7 @@ public class RentalService {
         User user = userRepository.findByStudentId(rentalRequestDto.getStudentId())
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다. studentId: " + rentalRequestDto.getStudentId()));
 
-        Product product = productRepository.findById(rentalRequestDto.getProductNumber())
+        Product product = productRepository.findByProductNumber(rentalRequestDto.getProductNumber())
                 .orElseThrow(() -> new IllegalArgumentException("제품을 찾을 수 없습니다. productNumber: " + rentalRequestDto.getProductNumber()));
 
         // Enum 값 변환
